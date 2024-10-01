@@ -1,0 +1,93 @@
+#include <stdio.h>
+
+int main() {
+    float account1_balance = 0;
+    float account2_balance = 0;
+    float account3_balance = 0;
+
+    int choice, account_choice;
+    float amount;
+
+    while(1) {
+        printf("\n----- Banking System Menu -----\n");
+        printf("1. Deposit\n");
+        printf("2. Withdraw\n");
+        printf("3. Check Balance\n");
+        printf("4. Exit\n");
+        printf("Choose an option: ");
+        scanf("%d", &choice);
+
+        if(choice == 4) {
+            printf("Exiting the program. Goodbye!\n");
+            break;
+        }
+
+        
+        printf("Select Account (1, 2, or 3): ");
+        scanf("%d", &account_choice);
+
+        
+        switch (choice) {
+            case 1:
+                printf("Enter deposit amount: ");
+                scanf("%f", &amount);
+                
+                if(amount > 0) {
+                    if(account_choice == 1) {
+                        account1_balance += amount;
+                        printf("Successfully deposited %.2f to Account 1. New balance: %.2f\n", amount, account1_balance);
+                    } else if(account_choice == 2) {
+                        account2_balance += amount;
+                        printf("Successfully deposited %.2f to Account 2. New balance: %.2f\n", amount, account2_balance);
+                    } else if(account_choice == 3) {
+                        account3_balance += amount;
+                        printf("Successfully deposited %.2f to Account 3. New balance: %.2f\n", amount, account3_balance);
+                    } else {
+                        printf("Invalid account choice!\n");
+                    }
+                } else {
+                    printf("Invalid deposit amount!\n");
+                }
+                break;
+
+            case 2:
+                printf("Enter withdrawal amount: ");
+                scanf("%f", &amount);
+
+                if(amount > 0) {
+                    if(account_choice == 1 && account1_balance >= amount) {
+                        account1_balance -= amount;
+                        printf("Successfully withdrew %.2f from Account 1. New balance: %.2f\n", amount, account1_balance);
+                    } else if(account_choice == 2 && account2_balance >= amount) {
+                        account2_balance -= amount;
+                        printf("Successfully withdrew %.2f from Account 2. New balance: %.2f\n", amount, account2_balance);
+                    } else if(account_choice == 3 && account3_balance >= amount) {
+                        account3_balance -= amount;
+                        printf("Successfully withdrew %.2f from Account 3. New balance: %.2f\n", amount, account3_balance);
+                    } else {
+                        printf("Insufficient balance or invalid account!\n");
+                    }
+                } else {
+                    printf("Invalid withdrawal amount!\n");
+                }
+                break;
+
+            case 3:
+                if(account_choice == 1) {
+                    printf("Account 1 balance: %.2f\n", account1_balance);
+                } else if(account_choice == 2) {
+                    printf("Account 2 balance: %.2f\n", account2_balance);
+                } else if(account_choice == 3) {
+                    printf("Account 3 balance: %.2f\n", account3_balance);
+                } else {
+                    printf("Invalid account choice!\n");
+                }
+                break;
+
+            default:
+                printf("Invalid choice! Please select a valid option.\n");
+        }
+    }
+
+    return 0;
+}
